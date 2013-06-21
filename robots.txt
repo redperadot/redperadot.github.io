@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://redperadot.darkgem.net/sitemap.xml 
+Sitemap: http://redperadot.github.io/sitemap.xml 

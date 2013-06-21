@@ -1,35 +1,35 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://redperadot.darkgem.net/blog/2013/06/21/the-start-of-something/</loc>
+        <loc>http://redperadot.github.io/blog/2013/06/21/the-start-of-something/</loc>
         <lastmod>2013-06-21T11:06:36-04:00</lastmod>
     </url>
     <url>
-        <loc>http://redperadot.darkgem.net/blog/2013/06/21/whats-with-the-name/</loc>
+        <loc>http://redperadot.github.io/blog/2013/06/21/whats-with-the-name/</loc>
         <lastmod>2013-06-21T10:49:52-04:00</lastmod>
     </url>
     <url>
-        <loc>http://redperadot.darkgem.net/about/</loc>
+        <loc>http://redperadot.github.io/about/</loc>
         <lastmod>2013-06-21T16:43:56-04:00</lastmod>
     </url>
     <url>
-        <loc>http://redperadot.darkgem.net/blog/archives/</loc>
+        <loc>http://redperadot.github.io/blog/archives/</loc>
         <lastmod>2013-06-21T11:06:36-04:00</lastmod>
     </url>
     <url>
-        <loc>http://redperadot.darkgem.net/</loc>
+        <loc>http://redperadot.github.io/</loc>
         <lastmod>2013-06-21T11:06:36-04:00</lastmod>
     </url>
     <url>
-        <loc>http://redperadot.darkgem.net/resume/</loc>
+        <loc>http://redperadot.github.io/resume/</loc>
         <lastmod>2013-06-21T14:09:33-04:00</lastmod>
     </url>
     <url>
-        <loc>http://redperadot.darkgem.net/robots.txt</loc>
+        <loc>http://redperadot.github.io/robots.txt</loc>
         <lastmod>2013-06-10T16:53:34-04:00</lastmod>
     </url>
     <url>
-        <loc>http://redperadot.darkgem.net/sites/</loc>
+        <loc>http://redperadot.github.io/sites/</loc>
         <lastmod>2013-06-21T17:01:48-04:00</lastmod>
     </url>
 </urlset>
