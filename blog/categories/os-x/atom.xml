@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: OS X | redperadot]]></title>
+  <link href="http://redperadot.github.io/blog/categories/os-x/atom.xml" rel="self"/>
+  <link href="http://redperadot.github.io/"/>
+  <updated>2013-06-24T22:58:35-04:00</updated>
+  <id>http://redperadot.github.io/</id>
+  <author>
+    <name><![CDATA[Cody Hannafon]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Resetting the Favicon cache]]></title>
+    <link href="http://redperadot.github.io/blog/2013/06/24/resetting-the-favicon-cache/"/>
+    <updated>2013-06-24T16:10:00-04:00</updated>
+    <id>http://redperadot.github.io/blog/2013/06/24/resetting-the-favicon-cache</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+</feed>
