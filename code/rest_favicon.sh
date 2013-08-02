@@ -2,15 +2,13 @@
 
 #  reset_favicon.sh
 #  
-#
 #  Created by Cody Hannafon on 6/24/13.
 #
+#  v1.3
 
-#echo 'Sudo Required:'
-#sudo clear
 clear
 OS=$(sw_vers -productVersion)
-if [ $OS == 'sw_vers: command not found' ]; then
+if [[ $OS == 'sw_vers: command not found' ]]; then
     OS='Linux'
 fi
 if [[ $OS == 10.5* || $OS == 10.6* || $OS == 10.7* || $OS == 10.8* || $OS == 10.9* ]]; then
@@ -22,14 +20,14 @@ if [[ $OS == 10.5* || $OS == 10.6* || $OS == 10.7* || $OS == 10.8* || $OS == 10.
 	echo "[For Chrome's cache enter '2' or 'Chrome']"
 	echo "[default '0']: \c"
 	read CHOICE
-	if [ $CHOICE == '' ]; then
+	if [[ $CHOICE == '' ]]; then
 	    CHOICE=0
 	fi
 	
 	if [[ $CHOICE == '0' || $CHOICE == 'all' ]]; then
 		echo "This will reset all caches and restart all web browsers. Continue? [default 'Yes']: \c"
 		read START
-		if [ $START == '' ]; then
+		if [[ $START == '' ]]; then
 		    START=yes
 		fi
 		
@@ -82,11 +80,11 @@ if [[ $OS == 10.5* || $OS == 10.6* || $OS == 10.7* || $OS == 10.8* || $OS == 10.
 	if [[ $CHOICE == '1' || $CHOICE == 'safari' ]]; then
 		echo "Reset Safari's favicon cache and restart browser? [default 'Yes']: \c"
 		read START
-		if [ $START == '' ]; then
+		if [[ $START == '' ]]; then
 		    START=yes
 		fi
 		
-		if [ $START == 'yes' ]; then
+		if [[ $START == 'yes' ]]; then
 			echo "Clearing Safari's favicon cache\r\c"
 			sleep .5
 			echo "Clearing Safari's favicon cache.\r\c"
@@ -109,7 +107,7 @@ if [[ $OS == 10.5* || $OS == 10.6* || $OS == 10.7* || $OS == 10.8* || $OS == 10.
 	    	echo '\n\c'
 	    	echo 'Done!'
 			sleep .5
-		elif [ $START == 'no' ]; then
+		elif [[ $START == 'no' ]]; then
 		    clear
 		    echo "$(tput setaf 2)exited with status code 0 [Success] $(tput sgr0)"
 		    exit 0
@@ -124,11 +122,11 @@ if [[ $OS == 10.5* || $OS == 10.6* || $OS == 10.7* || $OS == 10.8* || $OS == 10.
 	if [[ $CHOICE == '2' || $CHOICE == 'chrome' ]]; then
 		echo "Reset Chrome's favicon cache and restart browser? [default 'Yes']: \c"
 		read START
-		if [ $START == '' ]; then
+		if [[ $START == '' ]]; then
 		    START=yes
 		fi
 		
-		if [ $START == 'yes' ]; then
+		if [[ $START == 'yes' ]]; then
 			echo "Clearing Chrome's favicon cache\r\c"
 			sleep .5
 			echo "Clearing Chrome's favicon cache.\r\c"
@@ -151,7 +149,7 @@ if [[ $OS == 10.5* || $OS == 10.6* || $OS == 10.7* || $OS == 10.8* || $OS == 10.
 	    	echo '\n\c'
 	    	echo 'Done!'
 			sleep .5
-		elif [ $START == 'no' ]; then
+		elif [[ $START == 'no' ]]; then
 		    clear
 		    echo "$(tput setaf 2)exited with status code 0 [Success] $(tput sgr0)"
 		    exit 0
@@ -177,7 +175,7 @@ if [[ $OS == 10.5* || $OS == 10.6* || $OS == 10.7* || $OS == 10.8* || $OS == 10.
 else
 	clear
 	echo "Sorry but this script requires OS X version 10.5 - 10.9 not $OS..."
-	echo "exit status 2 [error]"
+	echo "$(tput setaf 1)exit status 2 [error] $(tput sgr0)"
 	exit 2
 fi
 

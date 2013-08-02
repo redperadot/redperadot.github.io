@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: OS X | redperadot]]></title>
+  <link href="http://redperadot.github.io/blog/categories/os-x/atom.xml" rel="self"/>
+  <link href="http://redperadot.github.io/"/>
+  <updated>2013-08-02T12:20:37-04:00</updated>
+  <id>http://redperadot.github.io/</id>
+  <author>
+    <name><![CDATA[Cody Hannafon]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Resetting the Favicon Cache]]></title>
+    <link href="http://redperadot.github.io/blog/2013/06/24/resetting-the-favicon-cache/"/>
+    <updated>2013-06-24T16:10:00-04:00</updated>
+    <id>http://redperadot.github.io/blog/2013/06/24/resetting-the-favicon-cache</id>
+    <content type="html"><![CDATA[<p>Have you ever tried to change that little icon in the browser tab, and failed miserably because of browser caching. Well I did, and after doing abit of research I figured it out. Well on OS X Safari, and Chrome anyway. What might I do with this information, well I created a shell script. No more waiting around for the cache to reset on its own or digging in settings, and files for me!</p>
+
+<!-- more -->
+
+
+<p>I get bugged by little things, and that icon not changing when I replaced the file bugged me the most. So I was on a mission! After five minutes of going through browser settings I decided to do what a sensible person would do, and went on to Google. Hearing the same old thing, change this setting change that, I finally found that the icons are kept in one file. If you remove that file the next time the browser is started it will generate a new empty file that will be propagated as you browse the web.</p>
+
+<p>For Safari the file is located at:
+<code>
+~/Library/Safari/WebpageIcons.db
+</code>
+For chrome it’s hidden in:
+<code>
+~/Library/Application\ Support/Google/Chrome/Default/Favicons
+</code></p>
+
+<p>Deleting those files each time I want to reset the icons is too difficult. So I made a fancy shell script. <a href="/code/rest_favicon.sh">[You can find v1.3 here.]</a> In the end this is what the script looks like:</p>
+
+<p>``` bash</p>
+
+<h1>!/bin/sh</h1>
+
+<h1>reset_favicon.sh</h1>
+
+<h1></h1>
+
+<h1>Created by Cody Hannafon on 6/24/13.</h1>
+
+<p>clear</p>
+
+<h1>Let’s see if you’re using OS X</h1>
+
+<p>OS=$(sw_vers -productVersion)
+if [ $OS == &lsquo;sw_vers: command not found&rsquo; ]; then</p>
+
+<pre><code>OS='Linux'
+</code></pre>
+
+<p>fi</p>
+
+<h1>If you are using OS X, else return an error</h1>
+
+<p>if [[ $OS == 10.5<em> || $OS == 10.6</em> || $OS == 10.7<em> || $OS == 10.8</em> || $OS == 10.9* ]]; then</p>
+
+<pre><code>#Disable case sensitivity
+shopt -s nocasematch
+#Asking what to do
+echo "Which favicon cache would you like to clear"
+echo "[For all caches enter     '0' or 'All'   ]"
+echo "[For Safari's cache enter '1' or 'Safari']"
+echo "[For Chrome's cache enter '2' or 'Chrome']"
+echo "[default '0']: \c"
+#Remember user choice
+read CHOICE
+if [ $CHOICE == '' ]; then
+    CHOICE=0
+fi
+#If the users choice was 0
+if [[ $CHOICE == '0' || $CHOICE == 'all' ]]; then
+    #Confirm choice
+    echo "This will reset all caches and restart all web browsers. Continue? [default 'Yes']: \c"
+    read START
+    if [ $START == '' ]; then
+        START=yes
+    fi
+    #If user chose to continue
+    if [[ $START == 'yes' || $START == 'y' ]]; then
+        echo 'Clearing all favicon caches\r\c'
+        sleep .5
+        echo 'Clearing all favicon caches.\r\c'
+        sleep .5
+        echo 'Clearing all favicon caches..\r\c'
+        sleep .5
+        echo 'Clearing all favicon caches...\r\c'
+        rm ~/Library/Safari/WebpageIcons.db
+        rm ~/Library/Application Support/Google/Favicons
+        echo '\n\c'
+        echo 'Done!'
+        echo 'Restarting Safari\r\c'
+        sleep .5
+        echo 'Restarting Safari.\r\c'
+        sleep .5
+        echo 'Restarting Safari..\r\c'
+        sleep .5
+        pkill Safari
+        echo 'Restarting Safari..\r\c'
+        open -a Safari
+        echo '\n\c'
+        echo 'Done!'
+        echo 'Restarting Chrome\r\c'
+        sleep .5
+        echo 'Restarting Chrome.\r\c'
+        sleep .5
+        echo 'Restarting Chrome..\r\c'
+        sleep .5
+        pkill Google\ Chrome
+        echo 'Restarting Chrome..\r\c'
+        open -a /Applications/Google\ Chrome.app/
+        echo '\n\c'
+        echo 'Done!'
+    #If the user did not chose to continue
+    elif [[ $START == 'no' || $START == 'n' ]]; then
+        clear
+        echo "$(tput setaf 2)exited with status code 0 [Success] $(tput sgr0)"
+        exit 0
+    #Otherwise they did not make the right choice, return an error
+    else
+        clear
+        echo "You did not choose either 'Yes' or 'No'..."
+        echo "$(tput setaf 1)exited with status code 2 [Incorrect usage] $(tput sgr0)"
+        exit 2
+    fi
+fi
+
+if [[ $CHOICE == '1' || $CHOICE == 'safari' ]]; then
+    echo "Reset Safari's favicon cache and restart browser? [default 'Yes']: \c"
+    read START
+    if [ $START == '' ]; then
+        START=yes
+    fi
+
+    if [ $START == 'yes' ]; then
+        echo "Clearing Safari's favicon cache\r\c"
+        sleep .5
+        echo "Clearing Safari's favicon cache.\r\c"
+        sleep .5
+        echo "Clearing Safari's favicon cache..\r\c"
+        sleep .5
+        echo "Clearing Safari's favicon cache...\r\c"
+        rm ~/Library/Safari/WebpageIcons.db
+        echo '\n\c'
+        echo 'Done!'
+        echo 'Restarting Safari\r\c'
+        sleep .5
+        echo 'Restarting Safari.\r\c'
+        sleep .5
+        echo 'Restarting Safari..\r\c'
+        sleep .5
+        pkill Safari
+        echo 'Restarting Safari...\r\c'
+        open -a Safari
+        echo '\n\c'
+        echo 'Done!'
+        sleep .5
+    elif [ $START == 'no' ]; then
+        clear
+        echo "$(tput setaf 2)exited with status code 0 [Success] $(tput sgr0)"
+        exit 0
+    else
+        clear
+        echo "You did not choose either 'Yes' or 'No'..."
+        echo "$(tput setaf 1)exited with status code 2 [Incorrect usage] $(tput sgr0)"
+        exit 2
+    fi
+fi
+
+if [[ $CHOICE == '2' || $CHOICE == 'chrome' ]]; then
+    echo "Reset Chrome's favicon cache and restart browser? [default 'Yes']: \c"
+    read START
+    if [ $START == '' ]; then
+        START=yes
+    fi
+
+    if [ $START == 'yes' ]; then
+        echo "Clearing Chrome's favicon cache\r\c"
+        sleep .5
+        echo "Clearing Chrome's favicon cache.\r\c"
+        sleep .5
+        echo "Clearing Chrome's favicon cache..\r\c"
+        sleep .5
+        echo "Clearing Chrome's favicon cache...\r\c"
+        rm ~/Library/Application\ Support/Google/Chrome/Default/Favicons
+        echo '\n\c'
+        echo 'Done!'
+        echo 'Restarting Chrome\r\c'
+        sleep .5
+        echo 'Restarting Chrome.\r\c'
+        sleep .5
+        echo 'Restarting Chrome..\r\c'
+        sleep .5
+        pkill Google\ Chrome
+        echo 'Restarting Chrome...\r\c'
+        open -a /Applications/Google\ Chrome.app/
+        echo '\n\c'
+        echo 'Done!'
+        sleep .5
+    elif [ $START == 'no' ]; then
+        clear
+        echo "$(tput setaf 2)exited with status code 0 [Success] $(tput sgr0)"
+        exit 0
+    else
+        clear
+        echo "You did not choose either 'Yes' or 'No'..."
+        echo "$(tput setaf 1)exited with status code 2 [Incorrect usage] $(tput sgr0)"
+        exit 2
+    fi
+fi
+#Enable case sensitivity
+shopt -u nocasematch
+clear
+#If user made the right choice and everythig went well so far, exit with success
+if [[ $CHOICE == '0' || $CHOICE == 'all' || $CHOICE == '1' || $CHOICE == 'safari' || $CHOICE == '2' || $CHOICE == 'chrome' ]]; then
+    echo "$(tput setaf 2)exited with status code 0 [Success] $(tput sgr0)"
+    exit 0
+#Otherwise the user did not make the right choice in the beginning, return an error
+else
+    echo "You did not choose either '0' '1' or '2'..."
+    echo "$(tput setaf 1)exited with status code 2 [Incorrect usage] $(tput sgr0)"
+    exit 2
+fi
+</code></pre>
+
+<h1>User is not using the right os, return an error</h1>
+
+<p>else</p>
+
+<pre><code>clear
+echo "Sorry but this script requires OS X version 10.5 - 10.9 not $OS..."
+echo "$(tput setaf 1)exit status 2 [error] $(tput sgr0)"
+exit 2
+</code></pre>
+
+<p>fi</p>
+
+<h1>EOF</h1>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>
